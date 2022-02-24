@@ -6,7 +6,7 @@
 /*   By: llonnrot <llonnrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:44:56 by llonnrot          #+#    #+#             */
-/*   Updated: 2022/02/24 13:50:16 by llonnrot         ###   ########.fr       */
+/*   Updated: 2022/02/24 14:30:26 by llonnrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void	check_guess(char *answer, char *guess, int i, int j)
 
 void	game(char *answer, int i)
 {
+	int len = 75;
+	int border = len;
+	int border2 = 2;
 	char *guess = ft_strnew(100);
 	char *compare_guess = ft_strdup(answer);
 	while (compare_guess[i] != '\0')
@@ -59,9 +62,21 @@ void	game(char *answer, int i)
 		compare_guess[i] = ft_toupper(compare_guess[i]);
 		i++;
 	}
-	printf("\n\n		       	Guess the WORD in six tries. Each guess must be a valid five-letter word, typed with lower-case!!\n\n							Hit the enter button to submit.\n\n	       	After each guess, the case distinction of the letters will change to show how close your guess was to the word.\n");
-	printf("\n				      	Lower-case letter = letter was found in word but not in right position\n\n				     	Upper-case letter = letter was found and in the right position\n\n						'-' = blank character, as in letter was not found.\n");
-	printf("\n						1st try! Type in your guess and hit enter!\n");
+	printf("\n\n		       	Guess the \033[0;32mWORD\033[0m in \033[0;33msix\033[0m tries. Each guess must be a valid \033[0;33mfive-letter\033[0m word, typed with \033[0;31mlower-case\033[0m!!\n\n							Hit the \033[0;32menter\033[0m key to submit.\n\n	       	After each guess, the case \033[0;36mdistinction\033[0m of the \033[0;33mletters\033[0m will change to show how close your \033[0;32mguess\033[0m was to the  \033[0;32mword\033[0m.\n");
+	printf("\n				      	\033[0;33mLower-case letter\033[0m = letter was found in word but \033[0;31mnot\033[0m in right position\n\n				     	\033[0;33mUpper-case letter\033[0m = letter was found and in the right position\n\n						\033[0;35m'-'\033[0m = blank character, as in letter was \033[0;31mnot\033[0m found.\n");
+	while (border2 > 0)
+	{
+		while(border > 0)
+		{
+			printf("\033[0;31m-\033[0;37m-");
+			border--;
+		}
+		printf("\n");
+		border = len;
+		border2--;
+	}
+	border2 = 2;
+	printf("\n\n						\033[0;34m1st\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n");
 	printf("\n							Your guess : ");
 	scanf("%s", guess);
 	check_guess(answer, guess, 0, 0);
@@ -99,69 +114,295 @@ void	game(char *answer, int i)
 	}
 	else
 	{
-		printf("\n\n						Your answer was incorrect, please try again!\n\n							Feedback : %s\n\n						2nd try! Type in your guess and hit enter!\n", guess);
+		printf("\n\n");
+		while (border2 > 0)
+		{
+			while(border > 0)
+			{
+				printf("\033[0;31m-\033[0;37m-");
+				border--;
+			}
+			printf("\n");
+			border = len;
+			border2--;
+		}
+		border2 = 2;
+		printf("\n\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n						\033[0;34m2nd\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n", guess);
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
+	printf("\n\n");
+	while (border2 > 0)
+	{
+		while(border > 0)
+		{
+			printf("\033[0;31m-\033[0;37m-");
+			border--;
+		}
+		printf("\n");
+		border = len;
+		border2--;
+	}
+	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
-		printf("\n				Congratulations! Your answer is correct!\n\n");
+		printf("						                                  \033[0;36m.''.\033[0m       \n");
+		printf("						      \033[0;32m.''.\033[0m      \033[0;34m.\033[0m        \033[0;33m*''*\033[0m    \033[0;36m:_\\/_:\033[0m     \033[0;35m.\033[0m \n");
+		printf("						     \033[0;32m:_\\/_:\033[0m   \033[0;34m_\\(/_\033[0m  \033[0;33m.:.*_\\/_*\033[0m   \033[0;36m: /\\ :\033[0m  \033[0;35m.'.:.'.\033[0m\n");
+		printf("						 \033[0;31m.''.\033[0m\033[0;32m: /\\ :\033[0m   \033[0;34m./)\\\033[0m   \033[0;33m':'* /\\ *\033[0m \033[0;36m:  '..'.\033[0m  \033[0;35m-=:o:=-\033[0m\n");
+		printf("						\033[0;31m:_\\/_:\033[0m\033[0;32m'.:::.\033[0m    \033[0;34m' *''*\033[0m    \033[0;33m* '.\'/.'\033[0m \033[0;36m_\\(/_\033[0m\033[0;35m'.':'.'\033[0m\n");
+		printf("						\033[0;31m: /\\ :\033[0m \033[0;32m:::::\033[0m     \033[0;34m*_\\/_*\033[0m     \033[0;33m-= o =-\033[0m  \033[0;36m/)\\\033[0m    \033[0;35m'  *\033[0m\n");
+		printf("						 \033[0;31m'..'\033[0m  \033[0;32m':::'\033[0m     \033[0;34m* /\\ *\033[0m     \033[0;33m.'/.\'.\033[0m   \033[0;36m'\033[0m\n");
+		printf("						      \033[0;33m*\033[0m            \033[0;34m*..*\033[0m         \033[0;33m:\033[0m\n");
+		printf("						       \033[0;33m*\033[0m\n");
+		printf("						        \033[0;33m*\033[0m\n");
+		printf("\n");
+		RED printf("\n							CONGRATLUATIONS! Your answer is correct!\n"); EC
+		RED printf("					                                                        ,---,  \n"); EC
+		RED printf("					      ,-.----.                                       ,`--.' |  \n"); EC
+		BLUE printf("					      \\    / \\     ,---,       .--.--.    .--.--.   |   :  :  \n"); EC
+		GREEN printf("					      |   :    \\   '  .' \\     /  /    '. /  /    '. '   '  ;  \n"); EC
+		YELLOW printf("					      |   |  .\\ : /  ;    '.  |  :  /`. /|  :  /`. / |   |  |  \n"); EC
+		RED printf("					      .   :  |: |:  :       \\ ;  |  |--` ;  |  |--`  '   :  ;  \n"); EC
+		CYAN printf("					      |   |   \\ ::  |   /\\   \\|  :  ;_   |  :  ;_    |   |  '  \n"); EC
+		PURPLE printf("					      |   : .   /|  :  ' ;.   :\\  \\    `. \\  \\    `. '   :  |  \n"); EC
+		RED printf("					      ;   | |`-' |  |  ;/  \\   \\`----.   \\ `----.   \\;   |  ;  \n"); EC
+		BLUE printf("					      |   | ;    '  :  | \\  \\ ,'__ \\  \\  | __ \\  \\  |`---'. |  \n"); EC
+		GREEN printf("					      :   ' |    |  |  '  '--' /  /`--'  //  /`--'  / `--..`;  \n"); EC
+		YELLOW printf("					      :   : :    |  :  :      '--'.     /'--'.     / .--,_     \n"); EC
+		CYAN printf("					      |   | :    |  | ,'        `--'---'   `--'---'  |    |`.  \n"); EC
+		PURPLE printf("					      `---'.|    `--''                               `-- -`, ; \n"); EC
+		RED printf("					        `---`                                           '---`  \n"); EC
+		printf("\n");
 		exit (0);
 	}
 	else
 	{
-		printf("\n						Your answer was incorrect, please try again!\n\n							Feedback : %s\n\n						3rd try! Type in your guess and hit enter!\n", guess);
+		printf("\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n						\033[0;34m3rd\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n", guess);
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
+	printf("\n\n");
+	while (border2 > 0)
+	{
+		while(border > 0)
+		{
+			printf("\033[0;31m-\033[0;37m-");
+			border--;
+		}
+		printf("\n");
+		border = len;
+		border2--;
+	}
+	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
-		printf("\n				Congratulations! Your answer is correct!\n\n");
+		printf("						                                  \033[0;36m.''.\033[0m       \n");
+		printf("						      \033[0;32m.''.\033[0m      \033[0;34m.\033[0m        \033[0;33m*''*\033[0m    \033[0;36m:_\\/_:\033[0m     \033[0;35m.\033[0m \n");
+		printf("						     \033[0;32m:_\\/_:\033[0m   \033[0;34m_\\(/_\033[0m  \033[0;33m.:.*_\\/_*\033[0m   \033[0;36m: /\\ :\033[0m  \033[0;35m.'.:.'.\033[0m\n");
+		printf("						 \033[0;31m.''.\033[0m\033[0;32m: /\\ :\033[0m   \033[0;34m./)\\\033[0m   \033[0;33m':'* /\\ *\033[0m \033[0;36m:  '..'.\033[0m  \033[0;35m-=:o:=-\033[0m\n");
+		printf("						\033[0;31m:_\\/_:\033[0m\033[0;32m'.:::.\033[0m    \033[0;34m' *''*\033[0m    \033[0;33m* '.\'/.'\033[0m \033[0;36m_\\(/_\033[0m\033[0;35m'.':'.'\033[0m\n");
+		printf("						\033[0;31m: /\\ :\033[0m \033[0;32m:::::\033[0m     \033[0;34m*_\\/_*\033[0m     \033[0;33m-= o =-\033[0m  \033[0;36m/)\\\033[0m    \033[0;35m'  *\033[0m\n");
+		printf("						 \033[0;31m'..'\033[0m  \033[0;32m':::'\033[0m     \033[0;34m* /\\ *\033[0m     \033[0;33m.'/.\'.\033[0m   \033[0;36m'\033[0m\n");
+		printf("						      \033[0;33m*\033[0m            \033[0;34m*..*\033[0m         \033[0;33m:\033[0m\n");
+		printf("						       \033[0;33m*\033[0m\n");
+		printf("						        \033[0;33m*\033[0m\n");
+		printf("\n");
+		RED printf("\n							CONGRATLUATIONS! Your answer is correct!\n"); EC
+		RED printf("					                                                        ,---,  \n"); EC
+		RED printf("					      ,-.----.                                       ,`--.' |  \n"); EC
+		BLUE printf("					      \\    / \\     ,---,       .--.--.    .--.--.   |   :  :  \n"); EC
+		GREEN printf("					      |   :    \\   '  .' \\     /  /    '. /  /    '. '   '  ;  \n"); EC
+		YELLOW printf("					      |   |  .\\ : /  ;    '.  |  :  /`. /|  :  /`. / |   |  |  \n"); EC
+		RED printf("					      .   :  |: |:  :       \\ ;  |  |--` ;  |  |--`  '   :  ;  \n"); EC
+		CYAN printf("					      |   |   \\ ::  |   /\\   \\|  :  ;_   |  :  ;_    |   |  '  \n"); EC
+		PURPLE printf("					      |   : .   /|  :  ' ;.   :\\  \\    `. \\  \\    `. '   :  |  \n"); EC
+		RED printf("					      ;   | |`-' |  |  ;/  \\   \\`----.   \\ `----.   \\;   |  ;  \n"); EC
+		BLUE printf("					      |   | ;    '  :  | \\  \\ ,'__ \\  \\  | __ \\  \\  |`---'. |  \n"); EC
+		GREEN printf("					      :   ' |    |  |  '  '--' /  /`--'  //  /`--'  / `--..`;  \n"); EC
+		YELLOW printf("					      :   : :    |  :  :      '--'.     /'--'.     / .--,_     \n"); EC
+		CYAN printf("					      |   | :    |  | ,'        `--'---'   `--'---'  |    |`.  \n"); EC
+		PURPLE printf("					      `---'.|    `--''                               `-- -`, ; \n"); EC
+		RED printf("					        `---`                                           '---`  \n"); EC
+		printf("\n");
 		exit (0);
 	}
 	else
 	{
-		printf("\n						Your answer was incorrect, please try again!\n\n							Feedback : %s\n\n						4th try! Type in your guess and hit enter!\n", guess);
+		printf("\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n						\033[0;34m4th\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n", guess);
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
+	printf("\n\n");
+	while (border2 > 0)
+	{
+		while(border > 0)
+		{
+			printf("\033[0;31m-\033[0;37m-");
+			border--;
+		}
+		printf("\n");
+		border = len;
+		border2--;
+	}
+	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
-		printf("\n				Congratulations! Your answer is correct!\n\n");
+		printf("						                                  \033[0;36m.''.\033[0m       \n");
+		printf("						      \033[0;32m.''.\033[0m      \033[0;34m.\033[0m        \033[0;33m*''*\033[0m    \033[0;36m:_\\/_:\033[0m     \033[0;35m.\033[0m \n");
+		printf("						     \033[0;32m:_\\/_:\033[0m   \033[0;34m_\\(/_\033[0m  \033[0;33m.:.*_\\/_*\033[0m   \033[0;36m: /\\ :\033[0m  \033[0;35m.'.:.'.\033[0m\n");
+		printf("						 \033[0;31m.''.\033[0m\033[0;32m: /\\ :\033[0m   \033[0;34m./)\\\033[0m   \033[0;33m':'* /\\ *\033[0m \033[0;36m:  '..'.\033[0m  \033[0;35m-=:o:=-\033[0m\n");
+		printf("						\033[0;31m:_\\/_:\033[0m\033[0;32m'.:::.\033[0m    \033[0;34m' *''*\033[0m    \033[0;33m* '.\'/.'\033[0m \033[0;36m_\\(/_\033[0m\033[0;35m'.':'.'\033[0m\n");
+		printf("						\033[0;31m: /\\ :\033[0m \033[0;32m:::::\033[0m     \033[0;34m*_\\/_*\033[0m     \033[0;33m-= o =-\033[0m  \033[0;36m/)\\\033[0m    \033[0;35m'  *\033[0m\n");
+		printf("						 \033[0;31m'..'\033[0m  \033[0;32m':::'\033[0m     \033[0;34m* /\\ *\033[0m     \033[0;33m.'/.\'.\033[0m   \033[0;36m'\033[0m\n");
+		printf("						      \033[0;33m*\033[0m            \033[0;34m*..*\033[0m         \033[0;33m:\033[0m\n");
+		printf("						       \033[0;33m*\033[0m\n");
+		printf("						        \033[0;33m*\033[0m\n");
+		printf("\n");
+		RED printf("\n							CONGRATLUATIONS! Your answer is correct!\n"); EC
+		RED printf("					                                                        ,---,  \n"); EC
+		RED printf("					      ,-.----.                                       ,`--.' |  \n"); EC
+		BLUE printf("					      \\    / \\     ,---,       .--.--.    .--.--.   |   :  :  \n"); EC
+		GREEN printf("					      |   :    \\   '  .' \\     /  /    '. /  /    '. '   '  ;  \n"); EC
+		YELLOW printf("					      |   |  .\\ : /  ;    '.  |  :  /`. /|  :  /`. / |   |  |  \n"); EC
+		RED printf("					      .   :  |: |:  :       \\ ;  |  |--` ;  |  |--`  '   :  ;  \n"); EC
+		CYAN printf("					      |   |   \\ ::  |   /\\   \\|  :  ;_   |  :  ;_    |   |  '  \n"); EC
+		PURPLE printf("					      |   : .   /|  :  ' ;.   :\\  \\    `. \\  \\    `. '   :  |  \n"); EC
+		RED printf("					      ;   | |`-' |  |  ;/  \\   \\`----.   \\ `----.   \\;   |  ;  \n"); EC
+		BLUE printf("					      |   | ;    '  :  | \\  \\ ,'__ \\  \\  | __ \\  \\  |`---'. |  \n"); EC
+		GREEN printf("					      :   ' |    |  |  '  '--' /  /`--'  //  /`--'  / `--..`;  \n"); EC
+		YELLOW printf("					      :   : :    |  :  :      '--'.     /'--'.     / .--,_     \n"); EC
+		CYAN printf("					      |   | :    |  | ,'        `--'---'   `--'---'  |    |`.  \n"); EC
+		PURPLE printf("					      `---'.|    `--''                               `-- -`, ; \n"); EC
+		RED printf("					        `---`                                           '---`  \n"); EC
+		printf("\n");
 		exit (0);
 	}
 	else
 	{
-		printf("\n						Your answer was incorrect, please try again!\n\n							Feedback : %s\n\n						5th try! Type in your guess and hit enter!\n", guess);
+		printf("\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n						\033[0;34m5th\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n", guess);
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
+	printf("\n\n");
+	while (border2 > 0)
+	{
+		while(border > 0)
+		{
+			printf("\033[0;31m-\033[0;37m-");
+			border--;
+		}
+		printf("\n");
+		border = len;
+		border2--;
+	}
+	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
-		printf("\n				Congratulations! Your answer is correct!\n\n");
+		printf("						                                  \033[0;36m.''.\033[0m       \n");
+		printf("						      \033[0;32m.''.\033[0m      \033[0;34m.\033[0m        \033[0;33m*''*\033[0m    \033[0;36m:_\\/_:\033[0m     \033[0;35m.\033[0m \n");
+		printf("						     \033[0;32m:_\\/_:\033[0m   \033[0;34m_\\(/_\033[0m  \033[0;33m.:.*_\\/_*\033[0m   \033[0;36m: /\\ :\033[0m  \033[0;35m.'.:.'.\033[0m\n");
+		printf("						 \033[0;31m.''.\033[0m\033[0;32m: /\\ :\033[0m   \033[0;34m./)\\\033[0m   \033[0;33m':'* /\\ *\033[0m \033[0;36m:  '..'.\033[0m  \033[0;35m-=:o:=-\033[0m\n");
+		printf("						\033[0;31m:_\\/_:\033[0m\033[0;32m'.:::.\033[0m    \033[0;34m' *''*\033[0m    \033[0;33m* '.\'/.'\033[0m \033[0;36m_\\(/_\033[0m\033[0;35m'.':'.'\033[0m\n");
+		printf("						\033[0;31m: /\\ :\033[0m \033[0;32m:::::\033[0m     \033[0;34m*_\\/_*\033[0m     \033[0;33m-= o =-\033[0m  \033[0;36m/)\\\033[0m    \033[0;35m'  *\033[0m\n");
+		printf("						 \033[0;31m'..'\033[0m  \033[0;32m':::'\033[0m     \033[0;34m* /\\ *\033[0m     \033[0;33m.'/.\'.\033[0m   \033[0;36m'\033[0m\n");
+		printf("						      \033[0;33m*\033[0m            \033[0;34m*..*\033[0m         \033[0;33m:\033[0m\n");
+		printf("						       \033[0;33m*\033[0m\n");
+		printf("						        \033[0;33m*\033[0m\n");
+		printf("\n");
+		RED printf("\n							CONGRATLUATIONS! Your answer is correct!\n"); EC
+		RED printf("					                                                        ,---,  \n"); EC
+		RED printf("					      ,-.----.                                       ,`--.' |  \n"); EC
+		BLUE printf("					      \\    / \\     ,---,       .--.--.    .--.--.   |   :  :  \n"); EC
+		GREEN printf("					      |   :    \\   '  .' \\     /  /    '. /  /    '. '   '  ;  \n"); EC
+		YELLOW printf("					      |   |  .\\ : /  ;    '.  |  :  /`. /|  :  /`. / |   |  |  \n"); EC
+		RED printf("					      .   :  |: |:  :       \\ ;  |  |--` ;  |  |--`  '   :  ;  \n"); EC
+		CYAN printf("					      |   |   \\ ::  |   /\\   \\|  :  ;_   |  :  ;_    |   |  '  \n"); EC
+		PURPLE printf("					      |   : .   /|  :  ' ;.   :\\  \\    `. \\  \\    `. '   :  |  \n"); EC
+		RED printf("					      ;   | |`-' |  |  ;/  \\   \\`----.   \\ `----.   \\;   |  ;  \n"); EC
+		BLUE printf("					      |   | ;    '  :  | \\  \\ ,'__ \\  \\  | __ \\  \\  |`---'. |  \n"); EC
+		GREEN printf("					      :   ' |    |  |  '  '--' /  /`--'  //  /`--'  / `--..`;  \n"); EC
+		YELLOW printf("					      :   : :    |  :  :      '--'.     /'--'.     / .--,_     \n"); EC
+		CYAN printf("					      |   | :    |  | ,'        `--'---'   `--'---'  |    |`.  \n"); EC
+		PURPLE printf("					      `---'.|    `--''                               `-- -`, ; \n"); EC
+		RED printf("					        `---`                                           '---`  \n"); EC
+		printf("\n");
 		exit (0);
 	}
 	else
 	{
-		printf("\n						Your answer was incorrect, please try again!\n\n							Feedback : %s\n\n					LAST try!!! Type in your guess and hit enter! Good luck!\n", guess);
+		printf("\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n					\033[0;31mLAST\033[0m try!!! Type in your \033[0;32mguess\033[0m and hit enter! Good luck!\n", guess);
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
+	printf("\n\n");
+	while (border2 > 0)
+	{
+		while(border > 0)
+		{
+			printf("\033[0;31m-\033[0;37m-");
+			border--;
+		}
+		printf("\n");
+		border = len;
+		border2--;
+	}
+	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
-		printf("\n				Congratulations! Your answer is correct!\n\n");
+		printf("						                                  \033[0;36m.''.\033[0m       \n");
+		printf("						      \033[0;32m.''.\033[0m      \033[0;34m.\033[0m        \033[0;33m*''*\033[0m    \033[0;36m:_\\/_:\033[0m     \033[0;35m.\033[0m \n");
+		printf("						     \033[0;32m:_\\/_:\033[0m   \033[0;34m_\\(/_\033[0m  \033[0;33m.:.*_\\/_*\033[0m   \033[0;36m: /\\ :\033[0m  \033[0;35m.'.:.'.\033[0m\n");
+		printf("						 \033[0;31m.''.\033[0m\033[0;32m: /\\ :\033[0m   \033[0;34m./)\\\033[0m   \033[0;33m':'* /\\ *\033[0m \033[0;36m:  '..'.\033[0m  \033[0;35m-=:o:=-\033[0m\n");
+		printf("						\033[0;31m:_\\/_:\033[0m\033[0;32m'.:::.\033[0m    \033[0;34m' *''*\033[0m    \033[0;33m* '.\'/.'\033[0m \033[0;36m_\\(/_\033[0m\033[0;35m'.':'.'\033[0m\n");
+		printf("						\033[0;31m: /\\ :\033[0m \033[0;32m:::::\033[0m     \033[0;34m*_\\/_*\033[0m     \033[0;33m-= o =-\033[0m  \033[0;36m/)\\\033[0m    \033[0;35m'  *\033[0m\n");
+		printf("						 \033[0;31m'..'\033[0m  \033[0;32m':::'\033[0m     \033[0;34m* /\\ *\033[0m     \033[0;33m.'/.\'.\033[0m   \033[0;36m'\033[0m\n");
+		printf("						      \033[0;33m*\033[0m            \033[0;34m*..*\033[0m         \033[0;33m:\033[0m\n");
+		printf("						       \033[0;33m*\033[0m\n");
+		printf("						        \033[0;33m*\033[0m\n");
+		printf("\n");
+		RED printf("\n							CONGRATLUATIONS! Your answer is correct!\n"); EC
+		RED printf("					                                                        ,---,  \n"); EC
+		RED printf("					      ,-.----.                                       ,`--.' |  \n"); EC
+		BLUE printf("					      \\    / \\     ,---,       .--.--.    .--.--.   |   :  :  \n"); EC
+		GREEN printf("					      |   :    \\   '  .' \\     /  /    '. /  /    '. '   '  ;  \n"); EC
+		YELLOW printf("					      |   |  .\\ : /  ;    '.  |  :  /`. /|  :  /`. / |   |  |  \n"); EC
+		RED printf("					      .   :  |: |:  :       \\ ;  |  |--` ;  |  |--`  '   :  ;  \n"); EC
+		CYAN printf("					      |   |   \\ ::  |   /\\   \\|  :  ;_   |  :  ;_    |   |  '  \n"); EC
+		PURPLE printf("					      |   : .   /|  :  ' ;.   :\\  \\    `. \\  \\    `. '   :  |  \n"); EC
+		RED printf("					      ;   | |`-' |  |  ;/  \\   \\`----.   \\ `----.   \\;   |  ;  \n"); EC
+		BLUE printf("					      |   | ;    '  :  | \\  \\ ,'__ \\  \\  | __ \\  \\  |`---'. |  \n"); EC
+		GREEN printf("					      :   ' |    |  |  '  '--' /  /`--'  //  /`--'  / `--..`;  \n"); EC
+		YELLOW printf("					      :   : :    |  :  :      '--'.     /'--'.     / .--,_     \n"); EC
+		CYAN printf("					      |   | :    |  | ,'        `--'---'   `--'---'  |    |`.  \n"); EC
+		PURPLE printf("					      `---'.|    `--''                               `-- -`, ; \n"); EC
+		RED printf("					        `---`                                           '---`  \n"); EC
+		printf("\n");
 		exit (0);
 	}
 	else
 	{
-		printf("\n					Your answer was incorrect.. You are out of tries! Too bad...\n");
+		printf("\033[0;31m\n\t\t\t	Your answer was incorrect.. You are out of tries! Too bad... (ノಠ益ಠ)ノ彡┻━┻\n\n\033[0m");
 		printf("\n\n							Correct answer : %s\n", answer);
 	}
+	printf("\n\n");
+	while (border2 > 0)
+	{
+		while(border > 0)
+		{
+			printf("\033[0;31m-\033[0;37m-");
+			border--;
+		}
+		printf("\n");
+		border = len;
+		border2--;
+	}
+	border2 = 2;
 
 }
 
@@ -202,7 +443,6 @@ int	main(void)
 	}
 	free (line);
 	char *answer = ft_strdup(dictionary[word]);
-	answer = "hello";
 	game(answer, 0);
 	exit (0);
 }
