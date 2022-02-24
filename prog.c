@@ -6,7 +6,7 @@
 /*   By: llonnrot <llonnrot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 13:44:56 by llonnrot          #+#    #+#             */
-/*   Updated: 2022/02/24 14:30:26 by llonnrot         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:13:54 by llonnrot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@
 #define CYAN printf("\033[0;36m");
 #define WHITE printf("\033[0;37m");
 #define EC printf("\033[0m");
+
+int	ft_islower(char c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	return (0);
+}
+
+int	ft_isupper(char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	return (0);
+}
 
 void	check_guess(char *answer, char *guess, int i, int j)
 {
@@ -53,6 +67,7 @@ void	check_guess(char *answer, char *guess, int i, int j)
 void	game(char *answer, int i)
 {
 	int len = 75;
+	int index = 0;
 	int border = len;
 	int border2 = 2;
 	char *guess = ft_strnew(100);
@@ -63,7 +78,7 @@ void	game(char *answer, int i)
 		i++;
 	}
 	printf("\n\n		       	Guess the \033[0;32mWORD\033[0m in \033[0;33msix\033[0m tries. Each guess must be a valid \033[0;33mfive-letter\033[0m word, typed with \033[0;31mlower-case\033[0m!!\n\n							Hit the \033[0;32menter\033[0m key to submit.\n\n	       	After each guess, the case \033[0;36mdistinction\033[0m of the \033[0;33mletters\033[0m will change to show how close your \033[0;32mguess\033[0m was to the  \033[0;32mword\033[0m.\n");
-	printf("\n				      	\033[0;33mLower-case letter\033[0m = letter was found in word but \033[0;31mnot\033[0m in right position\n\n				     	\033[0;33mUpper-case letter\033[0m = letter was found and in the right position\n\n						\033[0;35m'-'\033[0m = blank character, as in letter was \033[0;31mnot\033[0m found.\n");
+	printf("\n				      	\033[0;33mLower-case letter\033[0m = letter was found in word but \033[0;31mnot\033[0m in right position\n\n				     	\033[0;32mUpper-case letter\033[0m = letter was found and in the right position\n\n						\033[0;35m'-'\033[0m = blank character, as in letter was \033[0;31mnot\033[0m found.\n");
 	while (border2 > 0)
 	{
 		while(border > 0)
@@ -114,6 +129,25 @@ void	game(char *answer, int i)
 	}
 	else
 	{
+		printf("\n\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n");
+		printf("							Feedback : ");
+		while (guess[index] != '\0')
+		{
+			if (ft_islower(guess[index]) == 1)
+			{
+				YELLOW printf("%c", guess[index]); EC
+			}
+			if (ft_isupper(guess[index]) == 1)
+			{
+				GREEN printf("%c", guess[index]); EC
+			}
+			if (guess[index] == '-')
+			{
+				printf("%c", guess[index]);
+			}
+			index++;
+		}
+		index = 0;
 		printf("\n\n");
 		while (border2 > 0)
 		{
@@ -127,22 +161,10 @@ void	game(char *answer, int i)
 			border2--;
 		}
 		border2 = 2;
-		printf("\n\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n						\033[0;34m2nd\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n", guess);
+		printf("\n\n						\033[0;34m2nd\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n");
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
-	}
-	printf("\n\n");
-	while (border2 > 0)
-	{
-		while(border > 0)
-		{
-			printf("\033[0;31m-\033[0;37m-");
-			border--;
-		}
-		printf("\n");
-		border = len;
-		border2--;
 	}
 	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
@@ -179,24 +201,43 @@ void	game(char *answer, int i)
 	}
 	else
 	{
-		printf("\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n						\033[0;34m3rd\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n", guess);
+		printf("\n\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n");
+		printf("							Feedback : ");
+		while (guess[index] != '\0')
+		{
+			if (ft_islower(guess[index]) == 1)
+			{
+				YELLOW printf("%c", guess[index]); EC
+			}
+			if (ft_isupper(guess[index]) == 1)
+			{
+				GREEN printf("%c", guess[index]); EC
+			}
+			if (guess[index] == '-')
+			{
+				printf("%c", guess[index]);
+			}
+			index++;
+		}
+		index = 0;
+		printf("\n\n");
+		while (border2 > 0)
+		{
+			while(border > 0)
+			{
+				printf("\033[0;31m-\033[0;37m-");
+				border--;
+			}
+			printf("\n");
+			border = len;
+			border2--;
+		}
+		border2 = 2;
+		printf("\n\n						\033[0;34m3rd\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n");
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
-	printf("\n\n");
-	while (border2 > 0)
-	{
-		while(border > 0)
-		{
-			printf("\033[0;31m-\033[0;37m-");
-			border--;
-		}
-		printf("\n");
-		border = len;
-		border2--;
-	}
-	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
 		printf("						                                  \033[0;36m.''.\033[0m       \n");
@@ -231,24 +272,43 @@ void	game(char *answer, int i)
 	}
 	else
 	{
-		printf("\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n						\033[0;34m4th\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n", guess);
+		printf("\n\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n");
+		printf("							Feedback : ");
+		while (guess[index] != '\0')
+		{
+			if (ft_islower(guess[index]) == 1)
+			{
+				YELLOW printf("%c", guess[index]); EC
+			}
+			if (ft_isupper(guess[index]) == 1)
+			{
+				GREEN printf("%c", guess[index]); EC
+			}
+			if (guess[index] == '-')
+			{
+				printf("%c", guess[index]);
+			}
+			index++;
+		}
+		index = 0;
+		printf("\n\n");
+		while (border2 > 0)
+		{
+			while(border > 0)
+			{
+				printf("\033[0;31m-\033[0;37m-");
+				border--;
+			}
+			printf("\n");
+			border = len;
+			border2--;
+		}
+		border2 = 2;
+		printf("\n\n						\033[0;34m4th\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n");
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
-	printf("\n\n");
-	while (border2 > 0)
-	{
-		while(border > 0)
-		{
-			printf("\033[0;31m-\033[0;37m-");
-			border--;
-		}
-		printf("\n");
-		border = len;
-		border2--;
-	}
-	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
 		printf("						                                  \033[0;36m.''.\033[0m       \n");
@@ -283,24 +343,43 @@ void	game(char *answer, int i)
 	}
 	else
 	{
-		printf("\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n						\033[0;34m5th\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n", guess);
+		printf("\n\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n");
+		printf("							Feedback : ");
+		while (guess[index] != '\0')
+		{
+			if (ft_islower(guess[index]) == 1)
+			{
+				YELLOW printf("%c", guess[index]); EC
+			}
+			if (ft_isupper(guess[index]) == 1)
+			{
+				GREEN printf("%c", guess[index]); EC
+			}
+			if (guess[index] == '-')
+			{
+				printf("%c", guess[index]);
+			}
+			index++;
+		}
+		index = 0;
+		printf("\n\n");
+		while (border2 > 0)
+		{
+			while(border > 0)
+			{
+				printf("\033[0;31m-\033[0;37m-");
+				border--;
+			}
+			printf("\n");
+			border = len;
+			border2--;
+		}
+		border2 = 2;
+		printf("\n\n						\033[0;34m5th\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n");
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
-	printf("\n\n");
-	while (border2 > 0)
-	{
-		while(border > 0)
-		{
-			printf("\033[0;31m-\033[0;37m-");
-			border--;
-		}
-		printf("\n");
-		border = len;
-		border2--;
-	}
-	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
 		printf("						                                  \033[0;36m.''.\033[0m       \n");
@@ -335,24 +414,43 @@ void	game(char *answer, int i)
 	}
 	else
 	{
-		printf("\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n							Feedback : %s\n\n					\033[0;31mLAST\033[0m try!!! Type in your \033[0;32mguess\033[0m and hit enter! Good luck!\n", guess);
+		printf("\n\n						Your answer was \033[0;31mincorrect\033[0m, please try again!\n\n");
+		printf("							Feedback : ");
+		while (guess[index] != '\0')
+		{
+			if (ft_islower(guess[index]) == 1)
+			{
+				YELLOW printf("%c", guess[index]); EC
+			}
+			if (ft_isupper(guess[index]) == 1)
+			{
+				GREEN printf("%c", guess[index]); EC
+			}
+			if (guess[index] == '-')
+			{
+				printf("%c", guess[index]);
+			}
+			index++;
+		}
+		index = 0;
+		printf("\n\n");
+		while (border2 > 0)
+		{
+			while(border > 0)
+			{
+				printf("\033[0;31m-\033[0;37m-");
+				border--;
+			}
+			printf("\n");
+			border = len;
+			border2--;
+		}
+		border2 = 2;
+		printf("\n\n						\033[0;31mLAST\033[0m try! Type in your \033[0;32mguess\033[0m and hit enter!\n");
 		printf("\n							Your guess : ");
 		scanf("%s", guess);
 		check_guess(answer, guess, 0, 0);
 	}
-	printf("\n\n");
-	while (border2 > 0)
-	{
-		while(border > 0)
-		{
-			printf("\033[0;31m-\033[0;37m-");
-			border--;
-		}
-		printf("\n");
-		border = len;
-		border2--;
-	}
-	border2 = 2;
 	if (strcmp(compare_guess, guess) == 0)
 	{
 		printf("						                                  \033[0;36m.''.\033[0m       \n");
