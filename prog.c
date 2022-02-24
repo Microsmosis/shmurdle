@@ -1,8 +1,28 @@
-#include "libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prog.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: llonnrot <llonnrot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/24 13:44:56 by llonnrot          #+#    #+#             */
+/*   Updated: 2022/02/24 13:50:16 by llonnrot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <time.h>
 
+#define RED printf("\033[0;31m");
+#define GREEN printf("\033[0;32m");
+#define YELLOW printf("\033[0;33m");
+#define BLUE printf("\033[0;34m");
+#define PURPLE printf("\033[0;35m");
+#define CYAN printf("\033[0;36m");
+#define WHITE printf("\033[0;37m");
+#define EC printf("\033[0m");
 
 void	check_guess(char *answer, char *guess, int i, int j)
 {
@@ -39,7 +59,7 @@ void	game(char *answer, int i)
 		compare_guess[i] = ft_toupper(compare_guess[i]);
 		i++;
 	}
-	printf("\n\n		       	Guess the WORD in six tries. Each guess must be a valid five-letter word, typed with lower-case!!\n\n						     	Hit the enter button to submit.\n\n	       	After each guess, the case distinction of the letters will change to show how close your guess was to the word.\n");
+	printf("\n\n		       	Guess the WORD in six tries. Each guess must be a valid five-letter word, typed with lower-case!!\n\n							Hit the enter button to submit.\n\n	       	After each guess, the case distinction of the letters will change to show how close your guess was to the word.\n");
 	printf("\n				      	Lower-case letter = letter was found in word but not in right position\n\n				     	Upper-case letter = letter was found and in the right position\n\n						'-' = blank character, as in letter was not found.\n");
 	printf("\n						1st try! Type in your guess and hit enter!\n");
 	printf("\n							Your guess : ");
@@ -47,7 +67,34 @@ void	game(char *answer, int i)
 	check_guess(answer, guess, 0, 0);
 	if (strcmp(compare_guess, guess) == 0)
 	{
-		printf("\n				Congratulations! Your answer is correct!\n\n");
+		printf("						                                  \033[0;36m.''.\033[0m       \n");
+		printf("						      \033[0;32m.''.\033[0m      \033[0;34m.\033[0m        \033[0;33m*''*\033[0m    \033[0;36m:_\\/_:\033[0m     \033[0;35m.\033[0m \n");
+		printf("						     \033[0;32m:_\\/_:\033[0m   \033[0;34m_\\(/_\033[0m  \033[0;33m.:.*_\\/_*\033[0m   \033[0;36m: /\\ :\033[0m  \033[0;35m.'.:.'.\033[0m\n");
+		printf("						 \033[0;31m.''.\033[0m\033[0;32m: /\\ :\033[0m   \033[0;34m./)\\\033[0m   \033[0;33m':'* /\\ *\033[0m \033[0;36m:  '..'.\033[0m  \033[0;35m-=:o:=-\033[0m\n");
+		printf("						\033[0;31m:_\\/_:\033[0m\033[0;32m'.:::.\033[0m    \033[0;34m' *''*\033[0m    \033[0;33m* '.\'/.'\033[0m \033[0;36m_\\(/_\033[0m\033[0;35m'.':'.'\033[0m\n");
+		printf("						\033[0;31m: /\\ :\033[0m \033[0;32m:::::\033[0m     \033[0;34m*_\\/_*\033[0m     \033[0;33m-= o =-\033[0m  \033[0;36m/)\\\033[0m    \033[0;35m'  *\033[0m\n");
+		printf("						 \033[0;31m'..'\033[0m  \033[0;32m':::'\033[0m     \033[0;34m* /\\ *\033[0m     \033[0;33m.'/.\'.\033[0m   \033[0;36m'\033[0m\n");
+		printf("						      \033[0;33m*\033[0m            \033[0;34m*..*\033[0m         \033[0;33m:\033[0m\n");
+		printf("						       \033[0;33m*\033[0m\n");
+		printf("						        \033[0;33m*\033[0m\n");
+		printf("\n");
+		RED printf("\n							CONGRATLUATIONS! Your answer is correct!\n"); EC
+		RED printf("					                                                        ,---,  \n"); EC
+		RED printf("					      ,-.----.                                       ,`--.' |  \n"); EC
+		BLUE printf("					      \\    / \\     ,---,       .--.--.    .--.--.   |   :  :  \n"); EC
+		GREEN printf("					      |   :    \\   '  .' \\     /  /    '. /  /    '. '   '  ;  \n"); EC
+		YELLOW printf("					      |   |  .\\ : /  ;    '.  |  :  /`. /|  :  /`. / |   |  |  \n"); EC
+		RED printf("					      .   :  |: |:  :       \\ ;  |  |--` ;  |  |--`  '   :  ;  \n"); EC
+		CYAN printf("					      |   |   \\ ::  |   /\\   \\|  :  ;_   |  :  ;_    |   |  '  \n"); EC
+		PURPLE printf("					      |   : .   /|  :  ' ;.   :\\  \\    `. \\  \\    `. '   :  |  \n"); EC
+		RED printf("					      ;   | |`-' |  |  ;/  \\   \\`----.   \\ `----.   \\;   |  ;  \n"); EC
+		BLUE printf("					      |   | ;    '  :  | \\  \\ ,'__ \\  \\  | __ \\  \\  |`---'. |  \n"); EC
+		GREEN printf("					      :   ' |    |  |  '  '--' /  /`--'  //  /`--'  / `--..`;  \n"); EC
+		YELLOW printf("					      :   : :    |  :  :      '--'.     /'--'.     / .--,_     \n"); EC
+		CYAN printf("					      |   | :    |  | ,'        `--'---'   `--'---'  |    |`.  \n"); EC
+		PURPLE printf("					      `---'.|    `--''                               `-- -`, ; \n"); EC
+		RED printf("					        `---`                                           '---`  \n"); EC
+		printf("\n");
 		exit (0);
 	}
 	else
@@ -155,6 +202,7 @@ int	main(void)
 	}
 	free (line);
 	char *answer = ft_strdup(dictionary[word]);
+	answer = "hello";
 	game(answer, 0);
 	exit (0);
 }
